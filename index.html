@@ -1,0 +1,914 @@
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1100px;
+	}
+
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+
+	.disclaimerbox {
+		background-color: #eee;
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+
+	img.header-img {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+
+	img.rounded {
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+
+	td.dl-link {
+		height: 160px;
+		text-align: center;
+		font-size: 22px;
+	}
+
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		15px 15px 0 0px #fff, /* The fourth layer */
+		15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		20px 20px 0 0px #fff, /* The fifth layer */
+		20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		25px 25px 0 0px #fff, /* The fifth layer */
+		25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+
+	.vert-cent {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+
+  .tab1 {
+      tab-size: 2;
+  }
+
+  .tab2 {
+      tab-size: 4;
+  }
+
+  .tab4 {
+      tab-size: 20;
+  }
+
+  td {
+  padding: 10px;
+}
+</style>
+
+<html>
+<head>
+	<title>align-cruse</title>
+	<meta property="og:image" content="resources/model_arch.png"/> <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
+	<meta property="og:title" content="Align-CRUSE" />
+	<meta property="og:description" content="Paper supplementary" />
+
+	<!-- Get from Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src=""></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-75863369-6');
+	</script>
+</head>
+
+<body>
+	<br>
+	<center>
+		<span style="font-size:36px">DeepVQE: Real Time Deep Voice Quality Enhancement for Joint Acoustic Echo Cancellation, Noise Suppression and Dereverberation</span>
+		<table align=center width=1000px>
+			<table align=center width=1000px>
+				<tr>
+                    <td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://scholar.google.com/citations?user=x6iXHP4AAAAJ&hl=en&oi=ao">Ando Saabas</a></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://scholar.google.com/citations?user=Ix7a4LwAAAAJ&hl=en&oi=ao">Evgenii Indenbom</a></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://scholar.google.com/citations?user=W_1liH0AAAAJ&hl=en&oi=ao">Ristea Nicolae Catalin</a></span>
+						</center>
+					</td>
+          <td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://scholar.google.com/citations?user=dZzMiwgAAAAJ&hl=en">Tanel Parnamaa</a></span>
+						</center>
+					</td>
+          <td align=center width=100px>
+						<center>
+							<span style="font-size:24px">Jegor Guzvin</a></span>
+						</center>
+					</td>
+          <td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="https://scholar.google.com/citations?user=Qee1AwMAAAAJ&hl=en&oi=ao">Ross Cutler</a></span>
+						</center>
+					</td>
+				</tr>
+			</table>
+			<!-- <table align=center width=250px>
+				<tr>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href=''>[Paper]</a></span>
+						</center>
+					</td>
+					<td align=center width=120px>
+						<center>
+							<span style="font-size:24px"><a href='https://github.com/richzhang/webpage-template'>[GitHub]</a></span><br>
+						</center>
+					</td>
+				</tr>
+			</table> -->
+		</table>
+	</center>
+
+  <!-- <p></p> -->
+  <!-- <p></p> -->
+
+  <center>
+    <table align=center width=850px>
+			<tr>
+				<td width=460px>
+					<center>
+            <span style="font-size:24px">Microsoft Corporation</a></span><br>
+					</center>
+				</td>
+			</tr>
+		</table>
+  </center>
+  <center>
+    <table align=center width=850px>
+			<tr>
+				<td width=460px>
+					<center>
+            <span style="font-size:24px"></a></span><br>
+					</center>
+				</td>
+			</tr>
+		</table>
+  </center>
+  <center>
+    <table align=center width=850px>
+			<tr>
+				<td width=460px>
+					<center>
+            <span style="font-size:24px"></a></span><br>
+					</center>
+				</td>
+			</tr>
+		</table>
+  </center>
+  <center>
+    <table align=center width=850px>
+			<tr>
+				<td width=460px>
+					<center>
+            <span style="font-size:24px"></a></span><br>
+					</center>
+				</td>
+			</tr>
+		</table>
+  </center>
+
+	<center>
+		<table align=center width=850px>
+			<tr>
+				<td width=460px>
+					<center>
+						<img class="round" style="width:1000px" src="./resources/DeepVQE.png"/>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</center>
+
+	<hr>
+
+	<table align=center width=850px>
+		<center><h1>Abstract</h1></center>
+		<tr>
+			<td>
+                Acoustic echo cancellation (AEC), noise suppression (NS) and dereverberation (DR) are an integral part of modern full-duplex communication systems.
+                As the demand for teleconferencing systems increases, addressing these tasks is required for an effective and efficient online meeting experience.
+                Most prior research proposes solutions for these tasks separately, combining them with digital signal processing (DSP) based components,
+                resulting in complex pipelines that are often impractical to deploy in real-world applications.
+                This paper proposes a real-time cross-attention deep model, named DeepVQE, based on residual convolutional neural networks (CNNs)
+                and recurrent neural networks (RNNs) to simultaneously address AEC, NS, and DR. We conduct several ablation studies to analyze the
+                contributions of different components of our model to the overall performance.
+                DeepVQE achieves state-of-the-art performance on non-personalized tracks from the ICASSP 2023 Acoustic Echo Cancellation Challenge
+                and ICASSP 2023 Deep Noise Suppression Challenge test sets, showing that a single model can handle both tasks with excellent performance.
+                Moreover, the model runs in real-time and has been successfully deployed in production for one of the major communication platforms.
+            </td>
+		</tr>
+	</table>
+	<br>
+
+  <hr>
+	<center><h1>Official DEMO</h1></center>
+	<hr>
+
+  <center><iframe src="https://www.microsoft.com/en-us/videoplayer/embed/RE4ZhQW?autoplay=false" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="talk-1d-540p"></iframe></center>
+
+
+
+
+
+
+
+
+  <p>
+  </p>
+	<br>
+
+	<!-- <hr> -->
+	<!-- <center><h1>Samples</h1></center> -->
+
+  <hr>
+	<center><h1>2021 AEC Challenge test set (FEST-GEN and FEST-HD)</h1></center>
+  <hr>
+
+
+
+
+
+  <table style="width:1250">
+    <tbody>
+      <tr>
+        <td>
+          Microphone:
+        </td>
+        <td>
+            <audio controls="">
+              <source src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_mic.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_mic.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Far end:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_lpb.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_lpb.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Align-CRUSE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_acruse.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.18, ERLE: 43.97</p>
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_acruse.png"/>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_alignMap.png"/>
+        </td>
+      </tr>
+    <tr>
+        <td>
+          DeepVQE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_deepvqe.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.69, ERLE: 55.59</p>
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_deepvqe.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/aec-challenge/154d7bfe-8d19-4989-9494-10c97b11a26c_farend-singletalk_deepvqe_alignMap.png"/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+	<hr>
+
+
+  <table style="width:1250">
+    <tbody>
+      <tr>
+        <td>
+          Microphone:
+        </td>
+        <td>
+            <audio controls="">
+              <source src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_mic.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_mic.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Far end:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_lpb.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_lpb.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Align-CRUSE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_acruse.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.73, ERLE: 74.74</p>
+
+        </td>
+
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_acruse.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_alignMap.png"/>
+        </td>
+      </tr>
+    <tr>
+        <td>
+          DeepVQE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_deepvqe.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.65, ERLE: 79.92</p>
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_deepvqe.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c0RkyDyfkiAAp00V1qazQ_farend-singletalk_deepvqe_alignMap.png"/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <hr>
+
+
+
+
+
+
+
+  <table style="width:1250">
+    <tbody>
+      <tr>
+        <td>
+          Microphone:
+        </td>
+        <td>
+            <audio controls="">
+              <source src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_mic.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_mic.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Far end:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_lpb.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_lpb.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Align-CRUSE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_acruse.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.47, ERLE: 17.36</p>
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_acruse.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_alignMap.png"/>
+        </td>
+      </tr>
+    <tr>
+        <td>
+          DeepVQE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_deepvqe.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.80, ERLE: 12.97</p>
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_deepvqe.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0c8e3f01-ec41-4e32-b2d6-60857c9de3fb_farend-singletalk_deepvqe_alignMap.png"/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <hr>
+
+
+
+
+
+  <table style="width:1250">
+    <tbody>
+      <tr>
+        <td>
+          Microphone:
+        </td>
+        <td>
+            <audio controls="">
+              <source src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_mic.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_mic.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Far end:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_lpb.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_lpb.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Align-CRUSE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_acruse.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.48, ERLE: 46.57</p>
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_acruse.png"/>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_alignMap.png"/>
+        </td>
+      </tr>
+    <tr>
+        <td>
+          DeepVQE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_deepvqe.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.45, ERLE: 54.89</p>
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_deepvqe.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/aec-challenge/0fHajFljsUGJAlicYxKOUA_farend-singletalk_deepvqe_alignMap.png"/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <hr>
+	<center><h1>Synthetic (0.3-0.5)s delays test set (LD-M)</h1></center>
+	<hr>
+
+	<table style="width:1250">
+    <tbody>
+      <tr>This test set is synthetically created, therefore we included the label delay and the estimated delay from the align feature map.</tr>
+
+      <tr>
+        <td>
+          Microphone:
+        </td>
+        <td>
+            <audio controls="">
+              <source src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--mic.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--lpb.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Far end:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--lpb.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--lpb.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Align-CRUSE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--acruse.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.70, ERLE: 48.35</p>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--acruse.png"/>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--alignMap.png"/>
+          <p>True delay: 305ms, Estimated average delay: 315ms</p>
+
+        </td>
+      </tr>
+    <tr>
+        <td>
+          DeepVQE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--deepvqe.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.72, ERLE: 54.10</p>
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--_deepvqe.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/ld-m/2af5af46a14a2670--delay_305--ser_-1--_deepvqe_alignMap.png"/>
+            <p>True delay: 305ms, Estimated average delay: 302ms</p>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+
+
+
+	<hr>
+
+
+
+
+	<center><h1>Synthetic (0.5-1.0)s delays test set (LD-H)</h1></center>
+  <hr>
+
+
+  <table style="width:1250">
+    <tbody>
+      <tr>This test set is synthetically created, therefore we included the label delay and the estimated delay from the align feature map.</tr>
+      <tr>
+        <td>
+          Microphone:
+        </td>
+        <td>
+            <audio controls="">
+              <source src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--mic.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--mic.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Far end:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--lpb.wav" type="audio/wav">
+            </audio>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--lpb.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Align-CRUSE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--acruse.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.63, ERLE: 28.02</p>
+
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--acruse.png"/>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--alignMap.png"/>
+          <p>True delay: 763ms, Estimated average delay: 739ms</p>
+
+        </td>
+      </tr>
+    <tr>
+        <td>
+          DeepVQE:
+        </td>
+        <td>
+
+            <audio controls="">
+              <source src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--deepvqe.wav" type="audio/wav">
+            </audio>
+            <p>AECMOS: 4.79, ERLE: 64.65</p>
+        </td>
+        <td>
+          <img class="round" style="width:400px" src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--_deepvqe.png"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <p>Align feature map</p>
+          <img class="round" style="width:400px" src="resources/ld-h/55ad7ac9e214fc95--delay_763--ser_-3--_deepvqe_alignMap.png"/>
+            <p>True delay: 763ms, Estimated average delay: 752ms</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+  <hr>
+  <center><h1>Additional information</h1></center>
+  <hr>
+
+  <ul style=“list-style-type:square”>
+
+    <li>We included samples only for DeepVQE and Align-CRUSE.</li>
+
+    <li>The <b>align feature map</b> represents the delay distributions (between 0 and 1 second) for 20ms frames. More precisely, the vertical axis represents the probability delay distribution for a certain frame index.</li>
+
+    <li>For a better align feature map visualization, we included only the middle 500 frames from a sample.</li>
+
+    <li>The estimated average delay is computed by averaging the highest probability delay for each frame in the sample. It was reported only for synthetically data sets since for those samples we have the ground-truth.</li>
+
+    </ul>
+
+<br>
+</body>
+</html>
